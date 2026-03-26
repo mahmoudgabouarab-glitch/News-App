@@ -1,0 +1,7 @@
+import 'package:dartz/dartz.dart';
+import 'package:news_app/core/errors/failure.dart';
+import 'package:news_app/features/home/data/model/news_response.dart';
+
+abstract class HomeRepo {
+  Future<Either<Failure, NewsResponse>> getLastestNews();
+}
