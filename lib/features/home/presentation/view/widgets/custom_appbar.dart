@@ -4,7 +4,8 @@ import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/core/utils/styles.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({super.key});
+  final bool isback;
+  const CustomAppbar({super.key, this.isback = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,9 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         style: Styles.s17_800.copyWith(color: AppColor.titleAppbar),
       ),
       centerTitle: true,
-      leading: Icon(Icons.grid_view_rounded, color: AppColor.iconColor),
+      leading: isback
+          ? null
+          : Icon(Icons.grid_view_rounded, color: AppColor.iconColor),
       actions: [Icon(Icons.notification_add, color: AppColor.iconColor)],
     );
   }
