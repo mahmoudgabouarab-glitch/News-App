@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news_app/features/home/presentation/view/widgets/lastest_news_title.dart';
+import 'package:news_app/features/home/presentation/view/widgets/list_of_latest_news.dart';
 import 'package:news_app/features/home/presentation/view/widgets/search_filed.dart';
 
 class HomeBody extends StatelessWidget {
@@ -9,8 +11,14 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 24.h),
-      child: Column(children: const [SearchFiled()]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SearchFiled(),
+          const LastestNewsTitle(),
+          const ListOfLatestNews(),
+        ],
+      ),
     );
   }
 }
-
