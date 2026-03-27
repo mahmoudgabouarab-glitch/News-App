@@ -13,7 +13,7 @@ class ListOfLatestNews extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final newsState = ref.watch(homeProvider);
+    final newsState = ref.watch(latestNewsProvider);
     return newsState.when(
       skipLoadingOnReload: true,
       data: (data) {

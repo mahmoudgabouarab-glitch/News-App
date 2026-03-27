@@ -13,7 +13,29 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<Failure, NewsResponse>> getLastestNews() async {
     try {
-      var response = await _api.get(endpoint: ApiKeys.headlines, queryParameters: {"category":"general"});
+      var response = await _api.get(
+        endpoint: ApiKeys.headlines,
+        queryParameters: {"category": "general"},
+      );
+      final newsResponse = NewsResponse.fromJson(response);
+      return Right(newsResponse);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServiseFailure.fromdioException(e));
+      }
+      return Left(ServiseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, NewsResponse>> getCategoryNews({
+    required String category,
+  }) async {
+    try {
+      var response = await _api.get(
+        endpoint: ApiKeys.headlines,
+        queryParameters: {"category": category},
+      );
       final newsResponse = NewsResponse.fromJson(response);
       return Right(newsResponse);
     } catch (e) {

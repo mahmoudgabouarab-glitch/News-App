@@ -1,41 +1,28 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:news_app/core/network/service_locator.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
+import 'package:news_app/features/home/presentation/view/widgets/category_news.dart';
 
+// latest news
 
-final homeProvider = FutureProvider<NewsResponse>((ref) async {
+final latestNewsProvider = FutureProvider<NewsResponse>((ref) async {
   final repo = ref.read(homeRepoProvider);
   final result = await repo.getLastestNews();
-  return result.fold(
-    (failure) => throw failure,
-    (data) => data,
-  );
+  return result.fold((failure) => throw failure, (data) => data);
 });
 
-// final homeProvider = AsyncNotifierProvider<HomeNotifier, NewsResponse>(
-//   HomeNotifier.new,
-// );
+// category news
 
-// class HomeNotifier extends AsyncNotifier<NewsResponse> {
-//   @override
-//   Future<NewsResponse> build() async {
-//     final repo = ref.read(homeRepoProvider);
-//     return _getNews(repo);
-//   }
+final categoryNewsProvider = FutureProvider.family<NewsResponse, String>((
+  ref,
+  category,
+) async {
+  final repo = ref.read(homeRepoProvider);
+  final result = await repo.getCategoryNews(category: category);
+  return result.fold((failure) => throw failure, (data) => data);
+});
 
-//   Future<NewsResponse> _getNews(HomeRepo repo) async {
-//     final result = await repo.getLastestNews();
-
-//     return result.fold(
-//       (failure) => throw failure,
-//       (data) => data,
-//     );
-//   }
-
-//   Future<void> refresh() async {
-//     final repo = ref.read(homeRepoProvider);
-
-//     state = const AsyncLoading();
-//     state = await AsyncValue.guard(() => _getNews(repo));
-//   }
-// }
+final selectedCategoryProvider = StateProvider<String>(
+  (ref) => categories[0],
+);

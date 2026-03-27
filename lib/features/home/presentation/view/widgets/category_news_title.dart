@@ -3,8 +3,8 @@ import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/core/utils/spacing.dart';
 import 'package:news_app/core/utils/styles.dart';
 
-class LastestNewsTitle extends StatelessWidget {
-  const LastestNewsTitle({super.key});
+class CategoryNewsTitle extends StatelessWidget {
+  const CategoryNewsTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class LastestNewsTitle extends StatelessWidget {
       children: [
         spaceH(10),
         Text(
-          'Latest News',
+          'Category News',
           style: Styles.s16_800.copyWith(color: AppColor.title),
         ),
         spaceH(5),

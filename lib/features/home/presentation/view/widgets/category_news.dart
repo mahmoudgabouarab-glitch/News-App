@@ -1,38 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/utils/app_color.dart';
+import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
 
-class CategoryNews extends StatefulWidget {
+class CategoryNews extends ConsumerStatefulWidget {
   const CategoryNews({super.key});
 
   @override
-  State<CategoryNews> createState() => _CategoryNewsState();
+  ConsumerState<CategoryNews> createState() => _CategoryNewsState();
 }
 
-class _CategoryNewsState extends State<CategoryNews> {
+class _CategoryNewsState extends ConsumerState<CategoryNews> {
   int isActive = 0;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 40.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           final title = categories[index];
-
           return GestureDetector(
             onTap: () {
               setState(() {
                 isActive = index;
               });
+              ref.read(selectedCategoryProvider.notifier).state = title;
             },
             child: Container(
-              margin: const EdgeInsets.only(right: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              margin: EdgeInsets.only(right: 10.w),
+              padding: EdgeInsets.symmetric(horizontal: 18.w),
               decoration: BoxDecoration(
                 color: isActive == index ? AppColor.textThrird : Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
               ),
               alignment: Alignment.center,
               child: Text(
@@ -50,12 +53,10 @@ class _CategoryNewsState extends State<CategoryNews> {
 }
 
 List<String> categories = [
-  "All",
-  "Science",
+  "Business",
+  "Entertainment",
   "Health",
-  "Culture",
-  "Culture",
-  "Culture",
-  "Culture",
-  "Culture",
+  "Science",
+  "Sports",
+  "Technology",
 ];
