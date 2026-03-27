@@ -59,7 +59,7 @@ class Article extends Equatable {
       url: json['url'] as String? ?? '',
 
       urlToImage:
-          json['urlToImage'] as String? ?? 'https://via.placeholder.com/300',
+          json['urlToImage'] as String? ?? 'https://picsum.photos/100',
 
       publishedAt: json['publishedAt'] as String? ?? '',
 

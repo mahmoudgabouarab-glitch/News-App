@@ -43,7 +43,7 @@ class ServiseFailure extends Failure {
         );
 
       case 401:
-        return ServiseFailure("401", statusCode: statusCode);
+        return ServiseFailure(response['message'], statusCode: statusCode);
 
       case 403:
         return ServiseFailure(

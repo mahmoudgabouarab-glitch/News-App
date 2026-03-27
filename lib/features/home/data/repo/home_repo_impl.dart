@@ -13,7 +13,7 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<Failure, NewsResponse>> getLastestNews() async {
     try {
-      var response = await _api.get(endpoint: ApiKeys.headlines);
+      var response = await _api.get(endpoint: ApiKeys.headlines, queryParameters: {"category":"general"});
       final newsResponse = NewsResponse.fromJson(response);
       return Right(newsResponse);
     } catch (e) {
