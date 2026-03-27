@@ -63,14 +63,18 @@ class ListOfLatestNews extends ConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "By ${article.author}",
-                              style: Styles.s9_800.copyWith(
-                                color: AppColor.textSecondary,
+                            Expanded(
+                              child: Text(
+                                maxLines: 1,
+                                "By ${article.author}",
+                                style: Styles.s9_800.copyWith(
+                                  color: AppColor.textSecondary,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ),
                             Text(
-                              article.publishedAt,
+                              article.publishedAt.toFormattedDate(),
                               style: Styles.s9_800.copyWith(
                                 color: AppColor.textThrird,
                               ),

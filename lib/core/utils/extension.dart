@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 extension NavigationExtension on BuildContext {
   /// push
@@ -22,5 +23,12 @@ extension NavigationExtension on BuildContext {
   /// pop
   void popPage() {
     Navigator.of(this).pop();
+  }
+}
+
+extension DateFormatting on String {
+  String toFormattedDate() {
+    final date = DateTime.parse(this).toLocal();
+    return DateFormat('dd / MM').format(date);
   }
 }
