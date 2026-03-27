@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/utils/app_color.dart';
@@ -17,19 +18,24 @@ class OneItemOfCategory extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 16.h),
       child: GestureDetector(
-        onTap: () => context.push(const DetailsView()),
-        child: Container(
+        onTap: () => context.push(DetailsView(article: article)),
+        child: SizedBox(
           height: 105.h,
-          color: Colors.transparent,
           child: Row(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.r),
-                child: Image.network(
-                  article.urlToImage,
+                child: CachedNetworkImage(
+                  imageUrl: article.urlToImage,
                   width: 95.w,
                   height: 105.h,
                   fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => Container(
+                    width: 95.w,
+                    height: 105.h,
+                    color: AppColor.iconColor,
+                    child: const Icon(Icons.broken_image_outlined),
+                  ),
                 ),
               ),
               spaceW(8),
@@ -47,19 +53,25 @@ class OneItemOfCategory extends StatelessWidget {
                     ),
                     spaceH(5),
                     Text(
-                      article.source.name,
+                      article.author,
                       style: Styles.s9_800.copyWith(
                         color: AppColor.textSecondary,
                       ),
                     ),
                     Spacer(),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Innovation",
-                          style: Styles.s9_800.copyWith(color: AppColor.title),
+                        Expanded(
+                          child: Text(
+                            article.source.name,
+                            style: Styles.s9_800.copyWith(
+                              color: AppColor.title,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
                         ),
+                        Spacer(),
                         Text(
                           article.publishedAt.toFormattedDate(),
                           style: Styles.s9_800.copyWith(

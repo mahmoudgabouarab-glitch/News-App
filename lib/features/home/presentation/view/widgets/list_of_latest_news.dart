@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/errors/failure.dart';
 import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/core/utils/extension.dart';
+import 'package:news_app/core/utils/spacing.dart';
 import 'package:news_app/core/utils/styles.dart';
 import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
 import 'package:news_app/features/news_details/presentation/view/details_view.dart';
@@ -18,7 +20,7 @@ class ListOfLatestNews extends ConsumerWidget {
       skipLoadingOnReload: true,
       data: (data) {
         return SizedBox(
-          height: 200,
+          height: 172.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: data.articles.length,
@@ -26,29 +28,32 @@ class ListOfLatestNews extends ConsumerWidget {
             itemBuilder: (context, index) {
               final article = data.articles[index];
               return GestureDetector(
-                onTap: () => context.push(const DetailsView()),
+                onTap: () => context.push(DetailsView(article: article)),
                 child: Container(
-                  margin: EdgeInsets.only(right: 26.w),
-                  width: 260,
+                  margin: EdgeInsets.only(right: 10.w),
+                  width: 247.w,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
                   child: Column(
                     children: [
                       ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(20),
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20.r),
                         ),
-                        child: Image.network(
-                          article.urlToImage,
-                          height: 120,
+                        child: CachedNetworkImage(
+                          imageUrl: article.urlToImage,
+                          height: 116.h,
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8.r),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 2.h,
+                        ),
                         child: Text(
                           article.title,
                           maxLines: 2,
@@ -58,11 +63,14 @@ class ListOfLatestNews extends ConsumerWidget {
                           ),
                         ),
                       ),
+                      Spacer(),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w),
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Icon(Icons.edit, size: 14, color: Colors.grey),
+                            spaceW(5),
                             Expanded(
                               child: Text(
                                 maxLines: 1,
@@ -73,6 +81,7 @@ class ListOfLatestNews extends ConsumerWidget {
                                 ),
                               ),
                             ),
+                            Spacer(),
                             Text(
                               article.publishedAt.toFormattedDate(),
                               style: Styles.s9_800.copyWith(
@@ -82,6 +91,7 @@ class ListOfLatestNews extends ConsumerWidget {
                           ],
                         ),
                       ),
+                      spaceH(2),
                     ],
                   ),
                 ),
