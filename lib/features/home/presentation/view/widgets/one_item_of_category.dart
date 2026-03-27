@@ -6,7 +6,7 @@ import 'package:news_app/core/utils/extension.dart';
 import 'package:news_app/core/utils/spacing.dart';
 import 'package:news_app/core/utils/styles.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
-import 'package:news_app/features/news_details/presentation/view/details_view.dart';
+import 'package:news_app/features/details/details_view.dart';
 
 class OneItemOfCategory extends StatelessWidget {
   const OneItemOfCategory({super.key, required this.article});

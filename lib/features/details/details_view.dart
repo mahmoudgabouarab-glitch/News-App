@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
 import 'package:news_app/features/home/presentation/view/widgets/custom_appbar.dart';
-import 'package:news_app/features/news_details/presentation/view/widgets/details_body.dart';
+import 'package:news_app/features/details/details_body.dart';
 
 class DetailsView extends StatelessWidget {
   final Article article;
