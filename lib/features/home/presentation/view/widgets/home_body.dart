@@ -1,32 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/core/utils/spacing.dart';
+import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/features/home/presentation/view/widgets/category_news.dart';
 import 'package:news_app/features/home/presentation/view/widgets/category_news_title.dart';
 import 'package:news_app/features/home/presentation/view/widgets/lastest_news_title.dart';
 import 'package:news_app/features/home/presentation/view/widgets/list_of_category_news.dart';
 import 'package:news_app/features/home/presentation/view/widgets/list_of_latest_news.dart';
 import 'package:news_app/features/home/presentation/view/widgets/search_filed.dart';
+import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends ConsumerWidget {
   const HomeBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final category = ref.watch(selectedCategoryProvider);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SearchFiled(),
-          const LastestNewsTitle(),
-          const ListOfLatestNews(),
-          const CategoryNewsTitle(),
-          const CategoryNews(),
-          spaceH(20),
-          const ListOfCategoryNews(),
-        ],
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.h),
+      child: RefreshIndicator(
+        color: AppColor.textThrird,
+        onRefresh: () async {
+          await ref.read(latestNewsProvider.future);
+          await ref.read(categoryNewsProvider(category).future);
+        },
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  SearchFiled(),
+                  LastestNewsTitle(),
+                  ListOfLatestNews(),
+                  CategoryNewsTitle(),
+                ],
+              ),
+            ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _StickyHeaderDelegate(child: const CategoryNews()),
+            ),
+            SliverToBoxAdapter(child: const ListOfCategoryNews()),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _StickyHeaderDelegate({required this.child});
+
+  @override
+  double get minExtent => 33.h; // ارتفاع لما يثبت
+
+  @override
+  double get maxExtent => 40.h; // نفس القيمة عشان ميتغيرش حجمه
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(color: AppColor.backGround, child: child);
+  }
+
+  @override
+  bool shouldRebuild(covariant _StickyHeaderDelegate oldDelegate) {
+    return false;
   }
 }

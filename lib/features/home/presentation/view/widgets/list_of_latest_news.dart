@@ -23,6 +23,7 @@ class ListOfLatestNews extends ConsumerWidget {
           height: 172.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
             itemCount: data.articles.length,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
