@@ -25,7 +25,7 @@ class ListOfCategoryNews extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        return Center(child: Text(error.toString()));
+        return Text(error.toString());
       },
       loading: () {
         return const Center(child: CircularProgressIndicator());

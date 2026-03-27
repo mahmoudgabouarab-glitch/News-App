@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/utils/app_color.dart';
+import 'package:news_app/core/utils/extension.dart';
 import 'package:news_app/core/utils/styles.dart';
+import 'package:news_app/features/search/presentation/view/search_view.dart';
 
 class SearchFiled extends StatelessWidget {
   const SearchFiled({super.key});
@@ -13,15 +15,18 @@ class SearchFiled extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: Color(0xFFFFFFFF),
         filled: true,
-        suffixIcon: Container(
-          margin: EdgeInsets.only(right: 10.w, top: 7.h, bottom: 7.h),
-          height: 40.h,
-          width: 40.w,
-          decoration: BoxDecoration(
-            color: AppColor.textThrird,
-            shape: BoxShape.circle,
+        suffixIcon: GestureDetector(
+          onTap: () => context.push(const SearchView()),
+          child: Container(
+            margin: EdgeInsets.only(right: 10.w, top: 7.h, bottom: 7.h),
+            height: 40.h,
+            width: 40.w,
+            decoration: BoxDecoration(
+              color: AppColor.textThrird,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.arrow_forward, color: Colors.white),
           ),
-          child: const Icon(Icons.arrow_forward, color: Colors.white),
         ),
         prefixIcon: Icon(
           Icons.search,
