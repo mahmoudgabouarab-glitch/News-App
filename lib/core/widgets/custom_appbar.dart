@@ -15,11 +15,11 @@ class CustomAppbar extends ConsumerWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () async {
-            final newTheme = current == ThemeMode.dark
-                ? ThemeMode.light
-                : ThemeMode.dark;
-            ref.read(themeProvider.notifier).state = newTheme;
-            await CacheHelper.saveData(key: "theme", value: newTheme.name);
+            final notifier = ref.read(themeProvider.notifier);
+            final isDark = notifier.state == ThemeMode.dark;
+            final newTheme = isDark ? ThemeMode.light : ThemeMode.dark;
+            notifier.state = newTheme;
+            CacheHelper.saveData(key: "theme", value: newTheme.name);
           },
           icon: current == ThemeMode.dark
               ? const Icon(Icons.light_mode_outlined)
