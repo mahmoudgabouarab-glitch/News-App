@@ -16,7 +16,12 @@ class SearchRepoImpl extends SearchRepo {
     try {
       var response = await _api.get(
         endpoint: ApiKeys.everything,
-        queryParameters: {"q": q, "sortBy": "publishedAt"},
+        queryParameters: {
+          "q": q,
+          "sortBy": "publishedAt",
+          "pageSize": 20,
+          "searchIn": "title,description",
+        },
       );
       final searchResponse = NewsResponse.fromJson(response);
       return Right(searchResponse);

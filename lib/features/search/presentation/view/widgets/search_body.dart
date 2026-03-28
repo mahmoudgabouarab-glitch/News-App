@@ -12,6 +12,9 @@ class SearchBody extends ConsumerWidget {
     final searcharticle = ref.watch(searchProvider(searchState));
     return searcharticle.when(
       data: (data) {
+        if (data.articles.isEmpty) {
+          return const Center(child: Text("No Data Found"));
+        }
         return ListView.builder(
           // padding: EdgeInsets.symmetric(horizontal: 12),
           itemCount: data.articles.length,

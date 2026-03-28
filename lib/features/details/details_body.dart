@@ -5,6 +5,7 @@ import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/core/utils/extension.dart';
 import 'package:news_app/core/utils/spacing.dart';
 import 'package:news_app/core/utils/styles.dart';
+import 'package:news_app/core/widgets/show_error_image.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -26,6 +27,7 @@ class DetailsBody extends StatelessWidget {
                 height: 174.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
+                errorWidget: (context, url, error) => ShowErrorImage(),
               ),
             ),
             spaceH(20),
