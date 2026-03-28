@@ -30,7 +30,6 @@ class AppTheme {
 
     iconTheme: const IconThemeData(color: Color(0xFF434343)),
 
-    /// 🔥 TEXT THEME (بديل Styles)
     textTheme: TextTheme(
       // primary text
       bodyLarge: TextStyle(
@@ -100,7 +99,6 @@ class AppTheme {
 
     iconTheme: const IconThemeData(color: Color(0xFFE2E2E2)),
 
-    /// 🔥 TEXT THEME
     textTheme: TextTheme(
       bodyLarge: TextStyle(
         fontSize: 17.sp,

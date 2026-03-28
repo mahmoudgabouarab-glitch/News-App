@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app/news_app.dart';
+import 'package:news_app/core/network/cache_helper.dart';
+import 'package:news_app/features/home/presentation/view_model/theme_provider.dart';
 
 class CustomAppbar extends ConsumerWidget implements PreferredSizeWidget {
   const CustomAppbar({super.key});
@@ -13,12 +14,12 @@ class CustomAppbar extends ConsumerWidget implements PreferredSizeWidget {
       centerTitle: true,
       actions: [
         IconButton(
-          onPressed: () {
-            if (current == ThemeMode.dark) {
-              ref.read(themeProvider.notifier).state = ThemeMode.light;
-            } else {
-              ref.read(themeProvider.notifier).state = ThemeMode.dark;
-            }
+          onPressed: () async {
+            final newTheme = current == ThemeMode.dark
+                ? ThemeMode.light
+                : ThemeMode.dark;
+            ref.read(themeProvider.notifier).state = newTheme;
+            await CacheHelper.saveData(key: "theme", value: newTheme.name);
           },
           icon: current == ThemeMode.dark
               ? const Icon(Icons.light_mode_outlined)
