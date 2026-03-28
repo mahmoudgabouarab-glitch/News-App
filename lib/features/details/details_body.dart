@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/core/utils/extension.dart';
 import 'package:news_app/core/utils/spacing.dart';
-import 'package:news_app/core/utils/styles.dart';
 import 'package:news_app/core/widgets/show_error_image.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,6 +13,7 @@ class DetailsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: EdgeInsets.all(20.r),
       child: SingleChildScrollView(
@@ -31,35 +30,33 @@ class DetailsBody extends StatelessWidget {
               ),
             ),
             spaceH(20),
-            Text(
-              article.title,
-              style: Styles.s15_600.copyWith(color: AppColor.textPrimary),
-            ),
+            Text(article.title, style: theme.textTheme.bodyLarge),
             spaceH(20),
             Row(
               children: [
-                Icon(Icons.edit, size: 14, color: Colors.grey),
+                Icon(Icons.edit, size: 14, color: theme.iconTheme.color),
                 spaceW(5),
-                Text(
-                  article.author,
-                  style: Styles.s9_800.copyWith(color: AppColor.textSecondary),
-                ),
+                Text(article.author, style: theme.textTheme.bodySmall),
                 Spacer(),
                 Text(
                   article.publishedAt.toFormattedDate(),
-                  style: Styles.s9_800.copyWith(color: AppColor.textThrird),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
                 ),
               ],
             ),
             spaceH(20),
             Text(
               article.description,
-              style: Styles.s15_400.copyWith(color: AppColor.textPrimary),
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
             ),
             spaceH(20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColor.textThrird,
+                backgroundColor: theme.colorScheme.primary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.r),
                 ),
@@ -67,7 +64,9 @@ class DetailsBody extends StatelessWidget {
               onPressed: () async => await launchUrl(Uri.parse(article.url)),
               child: Text(
                 "Read More",
-                style: Styles.s15_600.copyWith(color: Colors.white),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: Colors.black,
+                ),
               ),
             ),
           ],

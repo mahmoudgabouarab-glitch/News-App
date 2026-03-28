@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/core/utils/extension.dart';
 import 'package:news_app/core/utils/spacing.dart';
-import 'package:news_app/core/utils/styles.dart';
 import 'package:news_app/core/widgets/show_error_image.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
 import 'package:news_app/features/details/details_view.dart';
@@ -16,6 +14,7 @@ class OneItemOfCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: EdgeInsets.only(bottom: 16.h),
       child: GestureDetector(
@@ -43,25 +42,20 @@ class OneItemOfCategory extends StatelessWidget {
                       article.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: Styles.s10_600.copyWith(
-                        color: AppColor.textPrimary,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     spaceH(5),
-                    Text(
-                      article.author,
-                      style: Styles.s9_800.copyWith(
-                        color: AppColor.textSecondary,
-                      ),
-                    ),
+                    Text(article.author, style: theme.textTheme.bodySmall),
                     Spacer(),
                     Row(
                       children: [
                         Expanded(
                           child: Text(
                             article.source.name,
-                            style: Styles.s9_800.copyWith(
-                              color: AppColor.title,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.w600,
                             ),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
@@ -70,8 +64,8 @@ class OneItemOfCategory extends StatelessWidget {
                         Spacer(),
                         Text(
                           article.publishedAt.toFormattedDate(),
-                          style: Styles.s9_800.copyWith(
-                            color: AppColor.textThrird,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.primary,
                           ),
                         ),
                       ],

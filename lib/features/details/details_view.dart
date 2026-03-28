@@ -10,7 +10,7 @@ class DetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(isback: true),
+      appBar: const CustomAppbar(),
       body: DetailsBody(article: article),
     );
   }

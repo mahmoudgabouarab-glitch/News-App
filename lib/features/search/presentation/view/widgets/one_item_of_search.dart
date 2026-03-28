@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/utils/extension.dart';
 import 'package:news_app/core/utils/spacing.dart';
-import 'package:news_app/core/utils/styles.dart';
 import 'package:news_app/core/widgets/show_error_image.dart';
 import 'package:news_app/features/details/details_view.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
@@ -15,9 +14,11 @@ class OneItemOfSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () => context.push(DetailsView(article: article)),
       child: Card(
+        color: theme.cardColor,
         child: Padding(
           padding: EdgeInsets.all(8.r),
           child: Row(
@@ -39,14 +40,18 @@ class OneItemOfSearch extends StatelessWidget {
                   children: [
                     Text(
                       article.title,
-                      style: Styles.s15_400,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     spaceH(20),
                     Text(
                       article.publishedAt.toFormattedDate(),
-                      style: Styles.s10_600.copyWith(color: Colors.grey),
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.primary,
+                      ),
                     ),
                   ],
                 ),
@@ -60,4 +65,3 @@ class OneItemOfSearch extends StatelessWidget {
     );
   }
 }
-

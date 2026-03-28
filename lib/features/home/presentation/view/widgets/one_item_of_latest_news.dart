@@ -1,58 +1,48 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/core/utils/extension.dart';
 import 'package:news_app/core/utils/spacing.dart';
-import 'package:news_app/core/utils/styles.dart';
 import 'package:news_app/core/widgets/show_error_image.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
 import 'package:news_app/features/details/details_view.dart';
 import 'package:flutter/material.dart';
+
 class OneItemOfLatestNews extends StatelessWidget {
-  const OneItemOfLatestNews({
-    super.key,
-    required this.article,
-  });
+  const OneItemOfLatestNews({super.key, required this.article});
 
   final Article article;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () => context.push(DetailsView(article: article)),
       child: Container(
         margin: EdgeInsets.only(right: 10.w),
         width: 247.w,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(20.r),
-              ),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
               child: CachedNetworkImage(
                 imageUrl: article.urlToImage,
-                height: 116.h,
+                height: 110.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 errorWidget: (context, url, error) => ShowErrorImage(),
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 10.w,
-                vertical: 2.h,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
               child: Text(
                 article.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: Styles.s10_600.copyWith(
-                  color: AppColor.textPrimary,
-                ),
+                style: theme.textTheme.titleSmall,
               ),
             ),
             Spacer(),
@@ -67,23 +57,21 @@ class OneItemOfLatestNews extends StatelessWidget {
                     child: Text(
                       maxLines: 1,
                       "By ${article.author}",
-                      style: Styles.s9_800.copyWith(
-                        color: AppColor.textSecondary,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall,
                     ),
                   ),
                   Spacer(),
                   Text(
                     article.publishedAt.toFormattedDate(),
-                    style: Styles.s9_800.copyWith(
-                      color: AppColor.textThrird,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.primary,
                     ),
                   ),
                 ],
               ),
             ),
-            spaceH(2),
+            spaceH(6),
           ],
         ),
       ),

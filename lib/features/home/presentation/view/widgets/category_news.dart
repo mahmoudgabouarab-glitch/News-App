@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
 
 class CategoryNews extends ConsumerStatefulWidget {
@@ -15,6 +14,7 @@ class _CategoryNewsState extends ConsumerState<CategoryNews> {
   int isActive = 0;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: categories.length,
@@ -36,14 +36,20 @@ class _CategoryNewsState extends ConsumerState<CategoryNews> {
               horizontal: isActive == index ? 30.w : 18.w,
             ),
             decoration: BoxDecoration(
-              color: isActive == index ? AppColor.textThrird : Colors.white,
+              color: isActive == index
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.surface,
               borderRadius: BorderRadius.circular(20.r),
             ),
             alignment: Alignment.center,
             child: Text(
               title,
               style: TextStyle(
-                color: isActive == index ? Colors.white : Colors.grey,
+                fontWeight: FontWeight.w500,
+                fontSize: 12.sp,
+                color: isActive == index
+                    ? theme.colorScheme.onPrimary
+                    : theme.textTheme.bodySmall?.color,
               ),
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/core/utils/app_color.dart';
 import 'package:news_app/features/home/presentation/view/widgets/category_news.dart';
 import 'package:news_app/features/home/presentation/view/widgets/category_news_title.dart';
 import 'package:news_app/features/home/presentation/view/widgets/lastest_news_title.dart';
@@ -15,11 +14,12 @@ class HomeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final category = ref.watch(selectedCategoryProvider);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.h),
       child: RefreshIndicator(
-        color: AppColor.textThrird,
+        color: theme.colorScheme.primary,
         onRefresh: () async {
           await ref.read(latestNewsProvider.future);
           await ref.read(categoryNewsProvider(category).future);
@@ -66,7 +66,8 @@ class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(color: AppColor.backGround, child: child);
+    final theme = Theme.of(context);
+    return Container(color: theme.scaffoldBackgroundColor, child: child);
   }
 
   @override

@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/core/utils/app_color.dart';
-import 'package:news_app/core/utils/styles.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:news_app/news_app.dart';
 
-class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final bool isback;
-  const CustomAppbar({super.key, this.isback = false});
+class CustomAppbar extends ConsumerWidget implements PreferredSizeWidget {
+  const CustomAppbar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final current = ref.watch(themeProvider);
     return AppBar(
-      actionsPadding: EdgeInsets.only(right: 30.w),
-      leadingWidth: 60.w,
-      title: Text(
-        'News',
-        style: Styles.s17_800.copyWith(color: AppColor.titleAppbar),
-      ),
+      title: Text('News', style: Theme.of(context).appBarTheme.titleTextStyle),
       centerTitle: true,
-      leading: isback
-          ? null
-          : Icon(Icons.grid_view_rounded, color: AppColor.iconColor),
-      actions: [Icon(Icons.notification_add, color: AppColor.iconColor)],
+      actions: [
+        IconButton(
+          onPressed: () {
+            if (current == ThemeMode.dark) {
+              ref.read(themeProvider.notifier).state = ThemeMode.light;
+            } else {
+              ref.read(themeProvider.notifier).state = ThemeMode.dark;
+            }
+          },
+          icon: current == ThemeMode.dark
+              ? const Icon(Icons.light_mode_outlined)
+              : const Icon(Icons.dark_mode_outlined),
+        ),
+      ],
     );
   }
 
