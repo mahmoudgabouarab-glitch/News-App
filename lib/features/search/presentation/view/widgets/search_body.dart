@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:news_app/core/widgets/custom_loading.dart';
 import 'package:news_app/features/search/presentation/view/widgets/one_item_of_search.dart';
 import 'package:news_app/features/search/presentation/view_model/search_provider.dart';
 
@@ -24,12 +26,8 @@ class SearchBody extends ConsumerWidget {
           },
         );
       },
-      error: (Object error, StackTrace stackTrace) {
-        return Center(child: Text(error.toString()));
-      },
-      loading: () {
-        return const Center(child: CircularProgressIndicator());
-      },
+      error: (error, _) => Center(child: Text(error.toString())),
+      loading: () => CustomLoading(),
     );
   }
 }
