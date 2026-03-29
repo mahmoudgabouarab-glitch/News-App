@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/widgets/custom_loading.dart';
-import 'package:news_app/features/home/presentation/view/widgets/one_item_of_latest_news.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/one_item_of_latest_news.dart';
 import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
 
 class ListOfLatestNews extends ConsumerWidget {

@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:news_app/core/network/service_locator.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
-import 'package:news_app/features/home/presentation/view/widgets/category_news.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/category_news.dart';
 
 // latest news
 

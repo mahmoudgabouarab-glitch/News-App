@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/features/home/presentation/view/widgets/category_news.dart';
-import 'package:news_app/features/home/presentation/view/widgets/category_news_title.dart';
-import 'package:news_app/features/home/presentation/view/widgets/lastest_news_title.dart';
-import 'package:news_app/features/home/presentation/view/widgets/list_of_category_news.dart';
-import 'package:news_app/features/home/presentation/view/widgets/list_of_latest_news.dart';
-import 'package:news_app/features/home/presentation/view/widgets/search_filed.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/category_news.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/category_news_title.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/lastest_news_title.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/list_of_category_news.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/list_of_latest_news.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/search_filed.dart';
 import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
 
 class HomeBody extends ConsumerWidget {

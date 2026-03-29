@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/widgets/custom_appbar.dart';
-import 'package:news_app/features/favorite/favorite_body.dart';
+import 'package:news_app/features/favorite/presentation/view/favorite_body.dart';
 
 class FavoriteView extends StatelessWidget {
   const FavoriteView({super.key});
