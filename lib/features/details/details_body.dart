@@ -36,12 +36,28 @@ class DetailsBody extends StatelessWidget {
               children: [
                 Icon(Icons.edit, size: 14, color: theme.iconTheme.color),
                 spaceW(5),
-                Text(article.author, style: theme.textTheme.bodySmall),
+                Expanded(
+                  child: Text(
+                    article.author,
+                    style: theme.textTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 Spacer(),
                 Text(
                   article.publishedAt.toFormattedDate(),
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.primary,
+                  ),
+                ),
+                spaceW(10),
+                GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.bookmark_border_outlined,
+                    size: 30,
+                    color: theme.iconTheme.color,
                   ),
                 ),
               ],
