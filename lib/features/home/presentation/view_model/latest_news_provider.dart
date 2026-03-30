@@ -1,19 +1,19 @@
 import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/core/network/service_locator.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
 
-class SearchNotifier extends AsyncNotifier<NewsResponse> {
-  late final _repo = ref.read(searchRepoProvider);
-
+class LatestNewsNotifier extends AsyncNotifier<NewsResponse> {
+  late final _repo = ref.read(homeRepoProvider);
   @override
   FutureOr<NewsResponse> build() {
     return NewsResponse(articles: []);
   }
 
-  Future<void> getSearch(String q) async {
+  Future<void> getLatestNews() async {
     state = const AsyncLoading();
-    final result = await _repo.searchNews(q: q);
+    final result = await _repo.getLastestNews();
     state = result.fold(
       (failure) => AsyncError(failure.errormessage, StackTrace.current),
       (data) => AsyncData(data),
@@ -21,6 +21,7 @@ class SearchNotifier extends AsyncNotifier<NewsResponse> {
   }
 }
 
-final searchProvider = AsyncNotifierProvider<SearchNotifier, NewsResponse>(
-  SearchNotifier.new,
-);
+final latestNewsProviderNotifier =
+    AsyncNotifierProvider<LatestNewsNotifier, NewsResponse>(
+      LatestNewsNotifier.new,
+    );

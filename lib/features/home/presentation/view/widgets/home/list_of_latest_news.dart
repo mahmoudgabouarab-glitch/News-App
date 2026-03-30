@@ -3,15 +3,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/widgets/custom_loading.dart';
 import 'package:news_app/features/home/presentation/view/widgets/home/one_item_of_latest_news.dart';
-import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
+import 'package:news_app/features/home/presentation/view_model/latest_news_provider.dart';
 
-class ListOfLatestNews extends ConsumerWidget {
+class ListOfLatestNews extends ConsumerStatefulWidget {
   const ListOfLatestNews({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final newsState = ref.watch(latestNewsProvider);
-    return newsState.when(
+  ConsumerState<ListOfLatestNews> createState() => _ListOfLatestNewsState();
+}
+
+class _ListOfLatestNewsState extends ConsumerState<ListOfLatestNews> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      ref.read(latestNewsProviderNotifier.notifier).getLatestNews();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(latestNewsProviderNotifier);
+    return state.when(
       data: (data) {
         return SizedBox(
           height: 172.h,

@@ -1,15 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 class NewsResponse extends Equatable {
-  final String status;
-  final int totalResults;
+  final String? status;
+  final int? totalResults;
   final List<Article> articles;
 
-  const NewsResponse({
-    required this.status,
-    required this.totalResults,
-    required this.articles,
-  });
+  const NewsResponse({this.status, this.totalResults, required this.articles});
 
   factory NewsResponse.fromJson(Map<String, dynamic> json) {
     return NewsResponse(
@@ -22,7 +18,7 @@ class NewsResponse extends Equatable {
   }
 
   @override
-  List<Object> get props => [status, totalResults, articles];
+  List<Object?> get props => [status, totalResults, articles];
 }
 
 class Article extends Equatable {

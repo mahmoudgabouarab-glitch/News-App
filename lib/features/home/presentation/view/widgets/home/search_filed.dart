@@ -23,7 +23,7 @@ class SearchFiled extends ConsumerWidget {
           elevation: 0,
           onPressed: () {
             if (controller.text.trim().isEmpty) return _snackBar(context);
-            ref.read(searchStateProvider.notifier).state = controller.text;
+            ref.read(searchProvider.notifier).getSearch(controller.text);
             context.push(const SearchView());
           },
           height: 40.h,

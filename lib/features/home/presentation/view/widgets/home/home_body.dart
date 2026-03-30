@@ -7,7 +7,8 @@ import 'package:news_app/features/home/presentation/view/widgets/home/lastest_ne
 import 'package:news_app/features/home/presentation/view/widgets/home/list_of_category_news.dart';
 import 'package:news_app/features/home/presentation/view/widgets/home/list_of_latest_news.dart';
 import 'package:news_app/features/home/presentation/view/widgets/home/search_filed.dart';
-import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
+import 'package:news_app/features/home/presentation/view_model/category_news_provider.dart';
+import 'package:news_app/features/home/presentation/view_model/latest_news_provider.dart';
 
 class HomeBody extends ConsumerWidget {
   const HomeBody({super.key});
@@ -15,14 +16,13 @@ class HomeBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final category = ref.watch(selectedCategoryProvider);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.h),
       child: RefreshIndicator(
         color: theme.colorScheme.primary,
         onRefresh: () async {
-          await ref.read(latestNewsProvider.future);
-          await ref.read(categoryNewsProvider(category).future);
+          await ref.read(latestNewsProviderNotifier.notifier).getLatestNews();
+          ref.read(categoryNewsProviderNotifier);
         },
         child: CustomScrollView(
           slivers: [

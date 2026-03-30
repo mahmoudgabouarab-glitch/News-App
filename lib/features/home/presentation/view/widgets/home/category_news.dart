@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/features/home/presentation/view_model/home_provider.dart';
+import 'package:news_app/features/home/presentation/view_model/category_news_provider.dart';
+import 'package:news_app/features/home/presentation/view_model/latest_news_provider.dart';
 
 class CategoryNews extends ConsumerStatefulWidget {
   const CategoryNews({super.key});
@@ -24,9 +25,7 @@ class _CategoryNewsState extends ConsumerState<CategoryNews> {
         final title = categories[index];
         return GestureDetector(
           onTap: () {
-            setState(() {
-              isActive = index;
-            });
+            setState(() => isActive = index);
             ref.read(selectedCategoryProvider.notifier).state = title;
           },
           child: AnimatedContainer(

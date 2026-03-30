@@ -10,9 +10,8 @@ class SearchBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchState = ref.watch(searchStateProvider);
-    final searcharticle = ref.watch(searchProvider(searchState));
-    return searcharticle.when(
+    final state = ref.watch(searchProvider);
+    return state.when(
       data: (data) {
         if (data.articles.isEmpty) {
           return const Center(child: Text("No Data Found"));
@@ -26,7 +25,8 @@ class SearchBody extends ConsumerWidget {
           },
         );
       },
-      error: (error, _) => Center(child: Text(error.toString())),
+      error: (error, _) =>
+          Center(child: Text(error.toString(), textAlign: TextAlign.center)),
       loading: () => CustomLoading(),
     );
   }
