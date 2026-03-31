@@ -13,7 +13,7 @@ class FavBtn extends ConsumerWidget {
     final theme = Theme.of(context);
     final isSaved = ref
         .watch(favProvider)
-        .favArticles
+        .value!
         .any((fav) => fav.url == article.url);
     return GestureDetector(
       onTap: () => ref.read(favProvider.notifier).toggleFav(article),

@@ -17,7 +17,6 @@ class SearchBody extends ConsumerWidget {
           return const Center(child: Text("No Data Found"));
         }
         return ListView.builder(
-          // padding: EdgeInsets.symmetric(horizontal: 12),
           itemCount: data.articles.length,
           itemBuilder: (BuildContext context, int index) {
             final article = data.articles[index];

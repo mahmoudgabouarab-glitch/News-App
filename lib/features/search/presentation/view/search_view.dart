@@ -7,6 +7,9 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: const CustomAppbar(), body: const SearchBody());
+    return Scaffold(
+      appBar: const CustomAppbar(actions: false, title: 'Search'),
+      body: const SearchBody(),
+    );
   }
 }
