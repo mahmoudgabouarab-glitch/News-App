@@ -1,34 +1,34 @@
 import 'package:equatable/equatable.dart';
 
 class WeatherResponse extends Equatable {
-  final Coord coord;
-  final List<Weather> weather;
-  final String base;
-  final Main main;
-  final int visibility;
-  final Wind wind;
-  final Clouds clouds;
-  final int dt;
-  final Sys sys;
-  final int timezone;
-  final int id;
-  final String name;
-  final int cod;
+  final Coord? coord;
+  final List<Weather>? weather;
+  final String? base;
+  final Main? main;
+  final int? visibility;
+  final Wind? wind;
+  final Clouds? clouds;
+  final int? dt;
+  final Sys? sys;
+  final int? timezone;
+  final int? id;
+  final String? name;
+  final int? cod;
 
   const WeatherResponse({
-    required this.coord,
-    required this.weather,
-    required this.base,
-    required this.main,
-    required this.visibility,
-    required this.wind,
-    required this.clouds,
-    required this.dt,
-    required this.sys,
-    required this.timezone,
-    required this.id,
-    required this.name,
-    required this.cod,
+    this.coord,
+    this.weather,
+    this.base,
+    this.main,
+    this.visibility,
+    this.wind,
+    this.clouds,
+    this.dt,
+    this.sys,
+    this.timezone,
+    this.id,
+    this.name,
+    this.cod,
   });
 
   factory WeatherResponse.fromJson(Map<String, dynamic> json) {
@@ -53,9 +53,20 @@ class WeatherResponse extends Equatable {
 
   @override
   List<Object?> get props => [
-        coord, weather, base, main, visibility,
-        wind, clouds, dt, sys, timezone, id, name, cod,
-      ];
+    coord,
+    weather,
+    base,
+    main,
+    visibility,
+    wind,
+    clouds,
+    dt,
+    sys,
+    timezone,
+    id,
+    name,
+    cod,
+  ];
 }
 
 // ─────────────────────────────────────────
@@ -143,9 +154,15 @@ class Main extends Equatable {
 
   @override
   List<Object?> get props => [
-        temp, feelsLike, tempMin, tempMax,
-        pressure, humidity, seaLevel, grndLevel,
-      ];
+    temp,
+    feelsLike,
+    tempMin,
+    tempMax,
+    pressure,
+    humidity,
+    seaLevel,
+    grndLevel,
+  ];
 }
 
 // ─────────────────────────────────────────

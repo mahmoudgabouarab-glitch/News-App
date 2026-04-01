@@ -9,7 +9,7 @@ abstract class HomeRepo {
     required String category,
   });
   Future<Either<Failure, WeatherResponse>> getWeather({
-    required int lat,
-    required int long,
+    required double lat,
+    required double long,
   });
 }

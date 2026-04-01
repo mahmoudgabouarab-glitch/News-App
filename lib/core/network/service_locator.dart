@@ -42,8 +42,12 @@ final weatherApiProvider = Provider<ApiService>((ref) {
     Dio(
       BaseOptions(
         baseUrl: ApiKeys.baseWeatherUrl,
-        headers: {"Authorization": 'Bearer ${ApiKeys.myTokenWeather}'},
+        queryParameters: {"appid": ApiKeys.myTokenWeather, "units": "metric"},
       ),
     ),
   );
+});
+final weatherRepoProvider = Provider<HomeRepo>((ref) {
+  final api = ref.read(weatherApiProvider);
+  return HomeRepoImpl(api);
 });

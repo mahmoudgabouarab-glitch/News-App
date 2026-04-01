@@ -49,13 +49,13 @@ class HomeRepoImpl extends HomeRepo {
 
   @override
   Future<Either<Failure, WeatherResponse>> getWeather({
-    required int lat,
-    required int long,
+    required double lat,
+    required double long,
   }) async {
     try {
       var response = await _api.get(
         endpoint: ApiKeys.weather,
-        queryParameters: {"lat": lat, "lon": long, "units": "metric"},
+        queryParameters: {"lat": lat, "lon": long},
       );
       final weatherResponse = WeatherResponse.fromJson(response);
       return Right(weatherResponse);
