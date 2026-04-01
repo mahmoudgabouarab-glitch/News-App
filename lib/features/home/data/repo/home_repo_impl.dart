@@ -4,6 +4,7 @@ import 'package:news_app/core/errors/failure.dart';
 import 'package:news_app/core/network/api_keys.dart';
 import 'package:news_app/core/network/api_service.dart';
 import 'package:news_app/features/home/data/model/news_response.dart';
+import 'package:news_app/features/home/data/model/weather_response.dart';
 import 'package:news_app/features/home/data/repo/home_repo.dart';
 
 class HomeRepoImpl extends HomeRepo {
@@ -38,6 +39,26 @@ class HomeRepoImpl extends HomeRepo {
       );
       final newsResponse = NewsResponse.fromJson(response);
       return Right(newsResponse);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServiseFailure.fromdioException(e));
+      }
+      return Left(ServiseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, WeatherResponse>> getWeather({
+    required int lat,
+    required int long,
+  }) async {
+    try {
+      var response = await _api.get(
+        endpoint: ApiKeys.weather,
+        queryParameters: {"lat": lat, "lon": long, "units": "metric"},
+      );
+      final weatherResponse = WeatherResponse.fromJson(response);
+      return Right(weatherResponse);
     } catch (e) {
       if (e is DioException) {
         return Left(ServiseFailure.fromdioException(e));
