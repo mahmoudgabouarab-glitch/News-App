@@ -7,7 +7,7 @@ import 'package:news_app/features/home/data/model/news_response.dart';
 import 'package:news_app/features/home/data/repo/home_repo.dart';
 
 class HomeRepoImpl extends HomeRepo {
-  final ApiServise _api;
+  final ApiService _api;
 
   HomeRepoImpl(this._api);
   @override

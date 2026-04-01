@@ -7,7 +7,7 @@ import 'package:news_app/features/home/data/model/news_response.dart';
 import 'package:news_app/features/search/data/repo/search_repo.dart';
 
 class SearchRepoImpl extends SearchRepo {
-  final ApiServise _api;
+  final ApiService _api;
 
   SearchRepoImpl(this._api);
 
