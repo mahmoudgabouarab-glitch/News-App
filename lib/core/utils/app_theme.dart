@@ -8,7 +8,7 @@ class AppTheme {
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     splashFactory: NoSplash.splashFactory,
-    scaffoldBackgroundColor: const Color(0xFFF8F8FA),
+    scaffoldBackgroundColor: const Color(0xFFF0F4F8),
 
     colorScheme: const ColorScheme.light(
       primary: Color(0xFFFF9900),
@@ -18,7 +18,7 @@ class AppTheme {
     ),
 
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFFF8F8FA),
+      backgroundColor: Color(0xFFF0F4F8),
       elevation: 0,
       centerTitle: true,
       scrolledUnderElevation: .5,

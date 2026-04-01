@@ -8,12 +8,18 @@ class ThemeDrawerBtn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final current = ref.watch(themeProvider);
     return ListTile(
       leading: current != ThemeMode.dark
-          ? const Icon(Icons.light_mode_outlined)
-          : const Icon(Icons.dark_mode_outlined),
-      title: Text(current != ThemeMode.dark ? 'Light' : 'Dark'),
+          ? Icon(Icons.light_mode_outlined, color: theme.iconTheme.color)
+          : Icon(Icons.dark_mode_outlined, color: theme.iconTheme.color),
+      title: Text(
+        current != ThemeMode.dark ? 'Light' : 'Dark',
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: theme.colorScheme.onSurface,
+        ),
+      ),
       onTap: () {
         final notifier = ref.read(themeProvider.notifier);
         final isDark = notifier.state == ThemeMode.dark;

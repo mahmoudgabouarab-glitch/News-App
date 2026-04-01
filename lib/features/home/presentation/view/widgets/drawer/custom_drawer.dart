@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/features/home/presentation/view/widgets/drawer/contact_us.dart';
 import 'package:news_app/features/home/presentation/view/widgets/drawer/fav_drawer_btn.dart';
 import 'package:news_app/features/home/presentation/view/widgets/drawer/theme_drawer_btn.dart';
 import 'package:news_app/features/home/presentation/view/widgets/drawer/weather_feature.dart';
@@ -17,9 +18,14 @@ class CustomDrawer extends StatelessWidget {
         ),
       ),
       backgroundColor: theme.scaffoldBackgroundColor,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: const [WeatherFeature(), FavDrawerBtn(), ThemeDrawerBtn()],
+      child: Column(
+        children: const [
+          WeatherFeature(),
+          FavDrawerBtn(),
+          ThemeDrawerBtn(),
+          Divider(indent: 30, endIndent: 30),
+          ContactUs(),
+        ],
       ),
     );
   }
