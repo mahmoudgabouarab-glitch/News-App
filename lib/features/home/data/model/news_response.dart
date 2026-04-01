@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:news_app/core/utils/app_assets.dart';
 
 class NewsResponse extends Equatable {
   final String? status;
@@ -56,7 +57,7 @@ class Article extends Equatable {
 
       url: json['url'] as String? ?? '',
 
-      urlToImage: json['urlToImage'] as String? ?? 'assets/defultimage.jpg',
+      urlToImage: json['urlToImage'] as String? ?? AppAssets.defultimage,
 
       publishedAt: json['publishedAt'] as String? ?? '',
 

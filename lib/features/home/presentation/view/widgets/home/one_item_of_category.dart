@@ -47,7 +47,12 @@ class OneItemOfCategory extends StatelessWidget {
                       ),
                     ),
                     spaceH(5),
-                    Text(article.author, style: theme.textTheme.bodySmall),
+                    Text(
+                      article.author,
+                      style: theme.textTheme.bodySmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     Spacer(),
                     Row(
                       children: [
