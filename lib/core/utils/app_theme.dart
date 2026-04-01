@@ -5,7 +5,9 @@ class AppTheme {
   /// ================= LIGHT =================
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    splashFactory: NoSplash.splashFactory,
     scaffoldBackgroundColor: const Color(0xFFF8F8FA),
 
     colorScheme: const ColorScheme.light(
@@ -74,7 +76,9 @@ class AppTheme {
   /// ================= DARK =================
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    splashFactory: NoSplash.splashFactory,
     scaffoldBackgroundColor: const Color(0xFF1C2128),
 
     colorScheme: const ColorScheme.dark(

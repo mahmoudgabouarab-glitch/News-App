@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/utils/extension.dart';
 import 'package:news_app/core/widgets/custom_appbar.dart';
-import 'package:news_app/features/favorite/presentation/view/favorite_view.dart';
+import 'package:news_app/features/home/presentation/view/widgets/home/custom_drawer.dart';
 import 'package:news_app/features/home/presentation/view/widgets/home/home_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,16 +8,10 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppbar(
-        leading: IconButton(
-          onPressed: () {
-            context.push(FavoriteView());
-          },
-          icon: const Icon(Icons.favorite),
-        ),
-      ),
-      body: const HomeBody(),
+    return const Scaffold(
+      drawer: CustomDrawer(),
+      appBar: CustomAppbar(),
+      body: HomeBody(),
     );
   }
 }
