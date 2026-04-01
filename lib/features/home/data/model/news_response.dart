@@ -21,6 +21,8 @@ class NewsResponse extends Equatable {
   List<Object?> get props => [status, totalResults, articles];
 }
 
+// ─────────────────────────────────────────
+
 class Article extends Equatable {
   final Source source;
   final String author;
@@ -74,6 +76,8 @@ class Article extends Equatable {
     content,
   ];
 }
+
+// ─────────────────────────────────────────
 
 class Source extends Equatable {
   final String id;
