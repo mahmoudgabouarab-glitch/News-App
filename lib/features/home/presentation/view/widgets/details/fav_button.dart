@@ -11,10 +11,12 @@ class FavBtn extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final isSaved = ref
-        .watch(favProvider)
-        .value!
-        .any((fav) => fav.url == article.url);
+    final isSaved =
+        ref
+            .watch(favProvider)
+            .whenData((favs) => favs.any((fav) => fav.url == article.url))
+            .value ??
+        false;
     return GestureDetector(
       onTap: () => ref.read(favProvider.notifier).toggleFav(article),
       child: Icon(

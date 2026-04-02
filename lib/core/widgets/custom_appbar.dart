@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final String? title;
+  final List<Widget>? actions;
 
-  const CustomAppbar({super.key, this.leading, this.title});
+  const CustomAppbar({super.key, this.leading, this.title, this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         style: Theme.of(context).appBarTheme.titleTextStyle,
       ),
       centerTitle: true,
+      actions: actions,
     );
   }
 

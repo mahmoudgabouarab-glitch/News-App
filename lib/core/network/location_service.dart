@@ -1,6 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
+  
  static Future<bool> get hasPermission async {
   final permission = await Geolocator.checkPermission();
   return permission == LocationPermission.whileInUse ||

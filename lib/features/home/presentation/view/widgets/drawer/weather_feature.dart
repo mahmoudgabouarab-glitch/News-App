@@ -29,42 +29,8 @@ class WeatherFeature extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  children: [
-                    Text(
-                      data.main?.temp.toString() ?? "N/A",
-                      style: TextStyle(
-                        fontSize: 26.sp,
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = 3
-                          ..color = Colors.black45,
-                      ),
-                    ),
-                    Text(
-                      data.main?.temp.toString() ?? "N/A",
-                      style: TextStyle(fontSize: 26.sp, color: Colors.white),
-                    ),
-                  ],
-                ),
-                Stack(
-                  children: [
-                    Text(
-                      data.name ?? "N/A",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = 2
-                          ..color = Colors.black45,
-                      ),
-                    ),
-                    Text(
-                      data.name ?? "N/A",
-                      style: TextStyle(fontSize: 14.sp, color: Colors.white),
-                    ),
-                  ],
-                ),
+                _customStack(temp: "${data.main?.temp.toInt()} °", size: 26),
+                _customStack(temp: data.name, size: 14),
                 Spacer(),
                 Row(
                   children: [
@@ -101,12 +67,31 @@ class WeatherFeature extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) => Center(child: Text(error.toString())),
-        loading: () {
-          return DrawerHeader(child: const CustomLoading());
-        },
+        loading: () => DrawerHeader(child: const CustomLoading()),
       ),
     );
   }
+}
+
+Widget _customStack({required String? temp, required double size}) {
+  return Stack(
+    children: [
+      Text(
+        temp ?? "N/A",
+        style: TextStyle(
+          fontSize: size.sp,
+          foreground: Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 3
+            ..color = Colors.black45,
+        ),
+      ),
+      Text(
+        temp ?? "N/A",
+        style: TextStyle(fontSize: size.sp, color: Colors.white),
+      ),
+    ],
+  );
 }
 
 String _getWeatherBackground(double temp) {
