@@ -15,8 +15,8 @@ class DetailsView extends StatelessWidget {
         title: 'Details',
         actions: [
           IconButton(
-            onPressed: () =>
-                SharePlus.instance.share(ShareParams(text: article.url)),
+            onPressed: () async =>
+                await SharePlus.instance.share(ShareParams(text: article.url)),
             icon: Icon(Icons.share_outlined),
           ),
         ],
